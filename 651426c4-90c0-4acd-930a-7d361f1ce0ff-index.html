@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aula — Deine Idee. Deine Schule.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,900&display=swap" rel="stylesheet">
+    <style>
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --purple: #7C3AED;
+            --purple-light: #A78BFA;
+            --purple-dark: #5B21B6;
+            --teal: #14B8A6;
+            --teal-light: #5EEAD4;
+            --pink: #EC4899;
+            --yellow: #FBBF24;
+            --green: #22C55E;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-serif: 'Fraunces', Georgia, serif;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* ========== DARK THEME (default) ========== */
+        [data-theme="dark"] {
+            --bg-dark: #0A0A0F;
+            --bg-section: #111118;
+            --bg-glass: rgba(255,255,255,0.06);
+            --border-glass: rgba(255,255,255,0.1);
+            --text-primary: #F1F1F6;
+            --text-secondary: rgba(241,241,246,0.6);
+            --text-muted: rgba(241,241,246,0.35);
+            --nav-scrolled-bg: rgba(10, 10, 15, 0.8);
+            --mobile-menu-bg: rgba(10,10,15,0.95);
+            --card-hover-bg: rgba(255,255,255,0.08);
+            --card-hover-border: rgba(255,255,255,0.15);
+            --input-bg: rgba(255,255,255,0.08);
+            --input-border: rgba(255,255,255,0.15);
+            --input-focus-border: var(--purple-light);
+            --orb-opacity: 0.4;
+            --noise-opacity: 0.015;
+        }
+
+        /* ========== LIGHT THEME ========== */
+        [data-theme="light"] {
+            --bg-dark: #F8F7FC;
+            --bg-section: #EFEFF5;
+            --bg-glass: rgba(0,0,0,0.03);
+            --border-glass: rgba(0,0,0,0.08);
+            --text-primary: #1A1A2E;
+            --text-secondary: rgba(26,26,46,0.6);
+            --text-muted: rgba(26,26,46,0.35);
+            --nav-scrolled-bg: rgba(248, 247, 252, 0.85);
+            --mobile-menu-bg: rgba(248,247,252,0.97);
+            --card-hover-bg: rgba(0,0,0,0.04);
+            --card-hover-border: rgba(0,0,0,0.12);
+            --input-bg: rgba(0,0,0,0.04);
+            --input-border: rgba(0,0,0,0.12);
+            --input-focus-border: var(--purple);
+            --orb-opacity: 0.15;
+            --noise-opacity: 0.008;
+        }
+
+        /* ========== SYSTEM PREFERENCE (auto) ========== */
+        @media (prefers-color-scheme: light) {
+            [data-theme="auto"] {
+                --bg-dark: #F8F7FC;
+                --bg-section: #EFEFF5;
+                --bg-glass: rgba(0,0,0,0.03);
+                --border-glass: rgba(0,0,0,0.08);
+                --text-primary: #1A1A2E;
+                --text-secondary: rgba(26,26,46,0.6);
+                --text-muted: rgba(26,26,46,0.35);
+                --nav-scrolled-bg: rgba(248, 247, 252, 0.85);
+                --mobile-menu-bg: rgba(248,247,252,0.97);
+                --card-hover-bg: rgba(0,0,0,0.04);
+                --card-hover-border: rgba(0,0,0,0.12);
+                --input-bg: rgba(0,0,0,0.04);
+                --input-border: rgba(0,0,0,0.12);
+                --input-focus-border: var(--purple);
+                --orb-opacity: 0.15;
+                --noise-opacity: 0.008;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            [data-theme="auto"] {
+                --bg-dark: #0A0A0F;
+                --bg-section: #111118;
+                --bg-glass: rgba(255,255,255,0.06);
+                --border-glass: rgba(255,255,255,0.1);
+                --text-primary: #F1F1F6;
+                --text-secondary: rgba(241,241,246,0.6);
+                --text-muted: rgba(241,241,246,0.35);
+                --nav-scrolled-bg: rgba(10, 10, 15, 0.8);
+                --mobile-menu-bg: rgba(10,10,15,0.95);
+                --card-hover-bg: rgba(255,255,255,0.08);
+                --card-hover-border: rgba(255,255,255,0.15);
+                --input-bg: rgba(255,255,255,0.08);
+                --input-border: rgba(255,255,255,0.15);
+                --input-focus-border: var(--purple-light);
+                --orb-opacity: 0.4;
+                --noise-opacity: 0.015;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-weight: 300;
+            color: var(--text-primary);
+            background: var(--bg-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background 0.4s, color 0.4s;
+        }
+
+        ::selection { background: var(--purple); color: white; }
+        a { color: inherit; text-decoration: none; }
+
+        /* ========== NOISE OVERLAY ========== */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            opacity: var(--noise-opacity);
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ========== THEME TOGGLE ========== */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 2rem;
+            padding: 0.2rem;
+            cursor: pointer;
+        }
+
+        .theme-toggle button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .theme-toggle button.active {
+            background: var(--purple);
+            color: white;
+        }
+
+        .theme-toggle button:hover:not(.active) {
+            color: var(--text-primary);
+        }
+
+        /* ========== NAVIGATION ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.5s var(--ease-out);
+        }
+
+        nav.scrolled {
+            background: var(--nav-scrolled-bg);
+            backdrop-filter: blur(1.5rem);
+            -webkit-backdrop-filter: blur(1.5rem);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 0.75rem 2rem;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-weight: 900;
+            font-size: 1.75rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--purple-light), var(--teal-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 0.875rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .nav-cta {
+            background: var(--purple) !important;
+            color: white !important;
+            padding: 0.5rem 1.25rem;
+            border-radius: 2rem;
+            font-weight: 500 !important;
+            transition: all 0.3s var(--ease-out);
+        }
+
+        .nav-cta:hover {
+            background: var(--purple-dark) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
+        }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .nav-hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        /* ========== CONTAINER ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .hero-bg .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: var(--orb-opacity);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero-bg .orb-1 {
+            width: 500px; height: 500px;
+            background: var(--purple);
+            top: -10%; left: -5%;
+        }
+
+        .hero-bg .orb-2 {
+            width: 400px; height: 400px;
+            background: var(--teal);
+            bottom: -15%; right: -10%;
+            animation-delay: -7s;
+        }
+
+        .hero-bg .orb-3 {
+            width: 300px; height: 300px;
+            background: var(--pink);
+            top: 30%; right: 20%;
+            animation-delay: -14s;
+            opacity: calc(var(--orb-opacity) * 0.5);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(1rem);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .hero-badge .dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .gradient-text,
+        .cta-content h2 .gradient-text {
+            background: linear-gradient(135deg, var(--purple-light), var(--teal-light), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--text-secondary);
+            max-width: 550px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            border-radius: 2rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.4s var(--ease-out);
+            font-family: var(--font-sans);
+        }
+
+        .btn-primary {
+            background: var(--purple);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--purple-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(124, 58, 237, 0.35);
+        }
+
+        .btn-ghost {
+            background: var(--bg-glass);
+            color: var(--text-primary);
+            border: 1px solid var(--border-glass);
+            backdrop-filter: blur(1rem);
+        }
+
+        .btn-ghost:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--card-hover-border);
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat { text-align: center; }
+
+        .hero-stat .number {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--purple-light), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-stat .label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.25rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            animation: bobble 2s ease-in-out infinite;
+        }
+
+        .scroll-indicator svg { width: 20px; height: 20px; opacity: 0.5; }
+
+        @keyframes bobble {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ========== SECTION BASE ========== */
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--purple-light);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.25rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about { background: var(--bg-section); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            backdrop-filter: blur(1rem);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--purple), var(--teal));
+        }
+
+        .about-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .about-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .about-examples { margin-top: 2rem; }
+
+        .about-examples h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .example-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+        .example-tag {
+            padding: 0.35rem 0.85rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid;
+        }
+
+        .example-tag.purple { border-color: rgba(124,58,237,0.3); background: rgba(124,58,237,0.1); color: var(--purple-light); }
+        .example-tag.teal { border-color: rgba(20,184,166,0.3); background: rgba(20,184,166,0.1); color: var(--teal-light); }
+        .example-tag.pink { border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.1); color: var(--pink); }
+        .example-tag.yellow { border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.1); color: var(--yellow); }
+
+        .about-right { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1.25rem;
+            border-radius: 1rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            transition: all 0.4s var(--ease-out);
+        }
+
+        .feature-item:hover {
+            background: var(--card-hover-bg);
+            border-color: var(--card-hover-border);
+            transform: translateX(4px);
+        }
+
+        .feature-icon {
+            width: 48px; height: 48px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .feature-icon.purple { background: rgba(124,58,237,0.15); }
+        .feature-icon.teal { background: rgba(20,184,166,0.15); }
+        .feature-icon.pink { background: rgba(236,72,153,0.15); }
+
+        .feature-text h4 { font-weight: 600; font-size: 1rem; margin-bottom: 0.25rem; }
+        .feature-text p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5; }
+
+        /* ========== PROCESS SECTION ========== */
+        .process { overflow: hidden; }
+
+        .process-header { text-align: center; margin-bottom: 4rem; }
+        .process-header .section-subtitle { margin: 0 auto; }
+
+        .timeline {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--purple), var(--teal), var(--yellow), var(--pink), var(--green));
+            transform: translateX(-50%);
+            opacity: 0.3;
+        }
+
+        .phase {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            align-items: center;
+            padding: 2rem 0;
+        }
+
+        .phase:nth-child(odd) .phase-content { grid-column: 1; text-align: right; }
+        .phase:nth-child(odd) .phase-spacer { grid-column: 3; }
+        .phase:nth-child(even) .phase-content { grid-column: 3; }
+        .phase:nth-child(even) .phase-spacer { grid-column: 1; }
+
+        .phase-dot {
+            grid-column: 2;
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+            justify-self: center;
+            transition: all 0.5s var(--ease-spring);
+        }
+
+        .phase:hover .phase-dot { transform: scale(1.15); }
+
+        .phase-dot.c-purple { background: rgba(124,58,237,0.2); border: 2px solid var(--purple); }
+        .phase-dot.c-teal { background: rgba(20,184,166,0.2); border: 2px solid var(--teal); }
+        .phase-dot.c-yellow { background: rgba(251,191,36,0.2); border: 2px solid var(--yellow); }
+        .phase-dot.c-pink { background: rgba(236,72,153,0.2); border: 2px solid var(--pink); }
+        .phase-dot.c-green { background: rgba(34,197,94,0.2); border: 2px solid var(--green); }
+
+        .phase-content {
+            padding: 1.5rem 2rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 1.25rem;
+            backdrop-filter: blur(0.5rem);
+            transition: all 0.4s var(--ease-out);
+        }
+
+        .phase:hover .phase-content {
+            background: var(--card-hover-bg);
+            border-color: var(--card-hover-border);
+        }
+
+        .phase-number {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-number.purple { color: var(--purple-light); }
+        .phase-number.teal { color: var(--teal-light); }
+        .phase-number.yellow { color: var(--yellow); }
+        .phase-number.pink { color: var(--pink); }
+        .phase-number.green { color: var(--green); }
+
+        .phase-content h3 {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-content p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+
+        .phase-tag {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 1rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+        }
+
+        /* ========== LIQUID DEMOCRACY ========== */
+        .liquid {
+            background: var(--bg-section);
+            overflow: hidden;
+        }
+
+        .liquid-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .liquid-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+        }
+
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .flow-row { display: flex; align-items: center; gap: 1rem; }
+
+        .flow-node {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            border-radius: 1rem;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.4s var(--ease-out);
+            border: 1px solid;
+        }
+
+        .flow-node:hover { transform: translateY(-3px); }
+
+        .flow-node.you { background: rgba(124,58,237,0.15); border-color: rgba(124,58,237,0.3); color: var(--purple-light); }
+        .flow-node.trust { background: rgba(20,184,166,0.15); border-color: rgba(20,184,166,0.3); color: var(--teal-light); }
+        .flow-node.expert { background: rgba(236,72,153,0.15); border-color: rgba(236,72,153,0.3); color: var(--pink); }
+        .flow-node.self { background: rgba(251,191,36,0.15); border-color: rgba(251,191,36,0.3); color: var(--yellow); }
+
+        .flow-arrow { font-size: 1.25rem; color: var(--text-muted); flex-shrink: 0; }
+        .flow-label { font-size: 0.75rem; color: var(--text-muted); text-align: center; font-style: italic; }
+
+        .liquid-features { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+
+        .liquid-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .liquid-feature .check {
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        /* ========== HIGHLIGHT BANNER ========== */
+        .highlight {
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-section);
+        }
+
+        .highlight::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(124,58,237,0.1) 0%, transparent 70%);
+        }
+
+        .highlight-content { position: relative; z-index: 1; }
+
+        .highlight-number {
+            font-family: var(--font-serif);
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--purple-light), var(--teal-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .highlight-text {
+            font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+            font-weight: 300;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 1rem auto 0;
+        }
+
+        .highlight-source { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.75rem; }
+
+        /* ========== FORTBILDUNG INFO ========== */
+        .fortbildung-section { background: var(--bg-section); }
+
+        .fortbildung-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            backdrop-filter: blur(1rem);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fortbildung-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--teal), var(--purple));
+        }
+
+        .fortbildung-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .fortbildung-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .register-date {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            background: rgba(20,184,166,0.15);
+            border: 1px solid rgba(20,184,166,0.3);
+            color: var(--teal-light);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .register-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .register-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .register-detail-icon {
+            width: 36px; height: 36px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            flex-shrink: 0;
+        }
+
+        /* ========== QUOTE ========== */
+        .quote-section { padding: 6rem 0; text-align: center; }
+
+        .quote-text {
+            font-family: var(--font-serif);
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 300;
+            line-height: 1.5;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-primary);
+            font-style: italic;
+        }
+
+        .quote-source { margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); }
+
+        /* ========== CTA ========== */
+        .cta-section {
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section .hero-bg .orb { opacity: calc(var(--orb-opacity) * 0.6); }
+
+        .cta-content { position: relative; z-index: 1; }
+
+        .cta-content h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-content p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-glass);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-weight: 900;
+            font-size: 1.25rem;
+            background: linear-gradient(135deg, var(--purple-light), var(--teal-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links { display: flex; gap: 2rem; list-style: none; }
+        .footer-links a { font-size: 0.8rem; color: var(--text-muted); transition: color 0.3s; }
+        .footer-links a:hover { color: var(--text-primary); }
+        .footer-copy { font-size: 0.75rem; color: var(--text-muted); }
+
+        /* ========== REVEAL ANIMATIONS ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s var(--ease-out);
+        }
+
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .about-grid, .liquid-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .timeline::before { left: 28px; }
+            .phase { grid-template-columns: 56px 1fr; gap: 1rem; }
+            .phase-dot { grid-column: 1 !important; }
+            .phase-content { grid-column: 2 !important; text-align: left !important; }
+            .phase-spacer { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-hamburger { display: flex; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                inset: 0;
+                background: var(--mobile-menu-bg);
+                backdrop-filter: blur(2rem);
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                z-index: 999;
+            }
+            .nav-links.open a { font-size: 1.5rem; color: var(--text-primary); }
+            section { padding: 5rem 0; }
+            .container { padding: 0 1.25rem; }
+            .hero-stats { gap: 2rem; }
+            .hero-stat .number { font-size: 2rem; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            nav { padding: 1rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .theme-toggle { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav id="navbar">
+    <div class="nav-left">
+        <a href="#" class="nav-logo">aula</a>
+        <div class="theme-toggle" id="themeToggle">
+            <button onclick="setTheme('light')" title="Hell" id="btn-light">&#x2600;&#xFE0F;</button>
+            <button onclick="setTheme('auto')" title="System" id="btn-auto">&#x1F4BB;</button>
+            <button onclick="setTheme('dark')" title="Dunkel" id="btn-dark">&#x1F319;</button>
+        </div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#about">Was ist aula?</a></li>
+        <li><a href="#process">Prozess</a></li>
+        <li><a href="#liquid">Liquid Democracy</a></li>
+        <li><a href="#cta" class="nav-cta">Mehr erfahren</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="hero">
+    <div class="hero-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            Echte Demokratie. Keine Simulation.
+        </div>
+        <h1>Deine Idee.<br><span class="gradient-text">Deine Schule.</span></h1>
+        <p>Bring deine Ideen ein, diskutiere mit, stimme ab &mdash; und was gewinnt, wird wirklich umgesetzt. aula ist die digitale Plattform, die eure Schule verändert.</p>
+        <div class="hero-buttons">
+            <a href="#about" class="btn btn-primary">Mehr erfahren &rarr;</a>
+            <a href="#about" class="btn btn-ghost">Mehr erfahren</a>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="number" data-count="72">0</div>
+                <div class="label">% fühlen sich wirksam</div>
+            </div>
+            <div class="hero-stat">
+                <div class="number" data-count="5">0</div>
+                <div class="label">Phasen zum Erfolg</div>
+            </div>
+            <div class="hero-stat">
+                <div class="number" data-count="100">0</div>
+                <div class="label">% echte Entscheidungen</div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <span>Scroll</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section class="about" id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-visual reveal">
+                <div class="about-card">
+                    <h3>Was ist aula?</h3>
+                    <p>aula ist eine digitale Beteiligungsplattform für Schulen. Hier könnt ihr Ideen einbringen, gemeinsam weiterentwickeln und darüber abstimmen &mdash; mit dem entscheidenden Unterschied: Was die Abstimmung gewinnt, wird von der Schule tatsächlich umgesetzt.</p>
+                    <div class="about-examples">
+                        <h4>Was kann man vorschlagen?</h4>
+                        <div class="example-tags">
+                            <span class="example-tag purple">Handyregeln</span>
+                            <span class="example-tag teal">Pausengestaltung</span>
+                            <span class="example-tag pink">Unterrichtsmethoden</span>
+                            <span class="example-tag yellow">Klassenfahrten</span>
+                            <span class="example-tag purple">Schulprojekte</span>
+                            <span class="example-tag teal">Raumgestaltung</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-right">
+                <div class="feature-item reveal reveal-delay-1">
+                    <div class="feature-icon purple">&#x1F4A1;</div>
+                    <div class="feature-text">
+                        <h4>Echte Mitbestimmung</h4>
+                        <p>Keine Simulation, kein Wunschkonzert. Was beschlossen wird, wird umgesetzt — verbindlich.</p>
+                    </div>
+                </div>
+                <div class="feature-item reveal reveal-delay-2">
+                    <div class="feature-icon teal">&#x1F4F1;</div>
+                    <div class="feature-text">
+                        <h4>Digital &amp; zugänglich</h4>
+                        <p>Beteilige dich überall und jederzeit &mdash; über die aula-Plattform auf jedem Gerät.</p>
+                    </div>
+                </div>
+                <div class="feature-item reveal reveal-delay-3">
+                    <div class="feature-icon pink">&#x1F91D;</div>
+                    <div class="feature-text">
+                        <h4>Gemeinsam entwickeln</h4>
+                        <p>Ideen werden nicht allein gelassen, sondern zusammen verbessert, diskutiert und verfeinert.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== PROCESS ========== -->
+<section class="process" id="process">
+    <div class="container">
+        <div class="process-header reveal">
+            <div class="section-label">Der Prozess</div>
+            <h2 class="section-title">Von der wilden Idee<br>zur echten Veränderung</h2>
+            <p class="section-subtitle">In fünf Phasen wird aus deinem Vorschlag eine verbindliche Entscheidung. Transparent, fair und demokratisch.</p>
+        </div>
+        <div class="timeline">
+            <div class="phase reveal">
+                <div class="phase-content">
+                    <div class="phase-number purple">Phase 1</div>
+                    <h3>&#x1F331; Wilde Idee</h3>
+                    <p>Poste deine Idee &mdash; egal wie unfertig. Andere können Verbesserungen vorschlagen und Unterstützung zeigen.</p>
+                    <span class="phase-tag">Jederzeit möglich</span>
+                </div>
+                <div class="phase-dot c-purple">&#x1F331;</div>
+                <div class="phase-spacer"></div>
+            </div>
+            <div class="phase reveal">
+                <div class="phase-spacer"></div>
+                <div class="phase-dot c-teal">&#x1F4AC;</div>
+                <div class="phase-content">
+                    <div class="phase-number teal">Phase 2</div>
+                    <h3>&#x1F4AC; Diskussion</h3>
+                    <p>Ähnliche Ideen werden gebündelt. In der wöchentlichen aula-Stunde arbeitet ihr gemeinsam an den Vorschlägen.</p>
+                    <span class="phase-tag">2&ndash;3 Wochen</span>
+                </div>
+            </div>
+            <div class="phase reveal">
+                <div class="phase-content">
+                    <div class="phase-number yellow">Phase 3</div>
+                    <h3>&#x1F50D; Machbarkeitscheck</h3>
+                    <p>Die Schulleitung prüft, ob die Idee umsetzbar ist. Kein Veto &mdash; nur Fakten. Ablehnungen müssen begründet werden.</p>
+                    <span class="phase-tag">Faktenbasiert</span>
+                </div>
+                <div class="phase-dot c-yellow">&#x1F50D;</div>
+                <div class="phase-spacer"></div>
+            </div>
+            <div class="phase reveal">
+                <div class="phase-spacer"></div>
+                <div class="phase-dot c-pink">&#x1F5F3;&#xFE0F;</div>
+                <div class="phase-content">
+                    <div class="phase-number pink">Phase 4</div>
+                    <h3>&#x1F5F3;&#xFE0F; Abstimmung</h3>
+                    <p>Alle Schüler:innen stimmen ab: dafür, dagegen oder Enthaltung. Per Liquid Democracy kannst du deine Stimme auch delegieren.</p>
+                    <span class="phase-tag">ca. 2 Wochen</span>
+                </div>
+            </div>
+            <div class="phase reveal">
+                <div class="phase-content">
+                    <div class="phase-number green">Phase 5</div>
+                    <h3>&#x2705; Umsetzung</h3>
+                    <p>Die Ideengeber:innen übernehmen Verantwortung &mdash; mit Unterstützung. Echte Veränderung passiert.</p>
+                    <span class="phase-tag">Verbindlich</span>
+                </div>
+                <div class="phase-dot c-green">&#x2705;</div>
+                <div class="phase-spacer"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== LIQUID DEMOCRACY ========== -->
+<section class="liquid" id="liquid">
+    <div class="container">
+        <div class="liquid-grid">
+            <div class="reveal">
+                <div class="section-label">Abstimmen neu gedacht</div>
+                <h2 class="section-title">Liquid Democracy</h2>
+                <p class="section-subtitle">Wähle selbst &mdash; oder gib deine Stimme jemandem, dem du vertraust. Flexibel, transparent und jederzeit änderbar.</p>
+                <div class="liquid-features">
+                    <div class="liquid-feature"><div class="check">&#x2713;</div><span>Eine Person = eine Stimme</span></div>
+                    <div class="liquid-feature"><div class="check">&#x2713;</div><span>Delegation pro Thema möglich</span></div>
+                    <div class="liquid-feature"><div class="check">&#x2713;</div><span>Jederzeit zurücknehmbar</span></div>
+                    <div class="liquid-feature"><div class="check">&#x2713;</div><span>Komplett transparent</span></div>
+                </div>
+            </div>
+            <div class="liquid-visual reveal reveal-delay-2">
+                <div class="flow-diagram">
+                    <div class="flow-label">Wie funktioniert das?</div>
+                    <div class="flow-row">
+                        <div class="flow-node you">&#x1F9D1; Du</div>
+                        <div class="flow-arrow">&rarr;</div>
+                        <div class="flow-node self">&#x1F5F3;&#xFE0F; Selbst abstimmen</div>
+                    </div>
+                    <div style="text-align:center; color: var(--text-muted); font-size:0.85rem;">oder</div>
+                    <div class="flow-row">
+                        <div class="flow-node you">&#x1F9D1; Du</div>
+                        <div class="flow-arrow">&rarr;</div>
+                        <div class="flow-node trust">&#x1F91D; Vertrauensperson</div>
+                    </div>
+                    <div class="flow-row" style="padding-left: 3.5rem;">
+                        <div class="flow-arrow">&rarr;</div>
+                        <div class="flow-node expert">&#x1F393; Expert:in</div>
+                    </div>
+                    <div class="flow-label">Beispiel: Du kennst dich mit Pausenhofgestaltung nicht aus? Gib deine Stimme an Yuki, die sich damit auskennt!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== HIGHLIGHT ========== -->
+<section class="highlight">
+    <div class="container">
+        <div class="highlight-content reveal">
+            <div class="highlight-number" data-count="72">0%</div>
+            <div class="highlight-text">der Schüler:innen sagen: &bdquo;Ich habe das Gefühl, ich kann etwas verändern.&ldquo;</div>
+            <div class="highlight-source">Quelle: aula-Evaluation 2022</div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FORTBILDUNG INFO ========== -->
+<section class="fortbildung-section" id="fortbildung">
+    <div class="container">
+        <div class="fortbildung-card reveal">
+            <div class="register-date">&#x1F4C5; 23. März 2026</div>
+            <h3>Worum geht es?</h3>
+            <p>In der Fortbildung lernt ihr die aula-Plattform kennen, erfahrt wie Liquid Democracy funktioniert und wie ihr an eurer Schule echte Mitbestimmung einführen könnt.</p>
+            <div class="register-details">
+                <div class="register-detail">
+                    <div class="register-detail-icon">&#x1F4CD;</div>
+                    <span>In eurer Schule / online</span>
+                </div>
+                <div class="register-detail">
+                    <div class="register-detail-icon">&#x23F0;</div>
+                    <span>Dauer: ca. 45 Minuten</span>
+                </div>
+                <div class="register-detail">
+                    <div class="register-detail-icon">&#x1F465;</div>
+                    <span>Für Schüler:innen &amp; Lehrkräfte</span>
+                </div>
+                <div class="register-detail">
+                    <div class="register-detail-icon">&#x1F4B0;</div>
+                    <span>Kostenlos</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== QUOTE ========== -->
+<section class="quote-section">
+    <div class="container reveal">
+        <blockquote class="quote-text">&bdquo;Wo keine Freiheit gewährt wird, kann Verantwortung nicht gelernt werden.&ldquo;</blockquote>
+        <div class="quote-source">&mdash; aula-Leitfaden für Schulen</div>
+    </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="cta-section" id="cta">
+    <div class="hero-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+    <div class="container cta-content reveal">
+        <h2>Bereit, eure Schule<br><span class="gradient-text">zu verändern?</span></h2>
+        <p>Sprich mit deiner Schule über aula. Der erste Schritt zu echten Veränderungen beginnt mit einer Idee &mdash; deiner Idee.</p>
+        <div class="hero-buttons">
+            <a href="https://aula.de" class="btn btn-primary" target="_blank">aula entdecken &rarr;</a>
+            <a href="#hero" class="btn btn-ghost">Zurück nach oben</a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">aula</div>
+            <ul class="footer-links">
+                <li><a href="#about">Was ist aula?</a></li>
+                <li><a href="#process">Prozess</a></li>
+                <li><a href="#liquid">Liquid Democracy</a></li>
+                <li><a href="#cta">Mitmachen</a></li>
+            </ul>
+            <div class="footer-copy">&copy; 2026 aula &mdash; Demokratie macht Schule</div>
+        </div>
+    </div>
+</footer>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+    // ===== THEME MANAGEMENT =====
+    function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('aula-theme', theme);
+        updateToggleButtons(theme);
+    }
+
+    function updateToggleButtons(theme) {
+        document.querySelectorAll('.theme-toggle button').forEach(btn => btn.classList.remove('active'));
+        const activeBtn = document.getElementById('btn-' + theme);
+        if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    // Initialize theme
+    (function() {
+        const saved = localStorage.getItem('aula-theme') || 'auto';
+        setTheme(saved);
+    })();
+
+    // ===== NAVBAR =====
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    function toggleNav() {
+        document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('navLinks').classList.remove('open');
+        });
+    });
+
+    // ===== REVEAL ANIMATIONS =====
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ===== COUNTER ANIMATION =====
+    function animateCounters() {
+        document.querySelectorAll('[data-count]').forEach(el => {
+            const target = parseInt(el.dataset.count);
+            const duration = 2000;
+            const startTime = performance.now();
+            const isPercent = el.closest('.highlight-number') !== null;
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 4);
+                const current = Math.round(eased * target);
+                el.textContent = isPercent ? current + '%' : current;
+                if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+        });
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) { animateCounters(); statsObserver.disconnect(); }
+        });
+    }, { threshold: 0.5 });
+
+    const statsEl = document.querySelector('.hero-stats');
+    if (statsEl) statsObserver.observe(statsEl);
+
+    // ===== ORB PARALLAX =====
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        document.querySelectorAll('.orb').forEach((orb, i) => {
+            const speed = 0.02 + (i * 0.01);
+            orb.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+
+</script>
+
+</body>
+</html>
